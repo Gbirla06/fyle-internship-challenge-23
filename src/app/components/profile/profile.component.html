@@ -13,7 +13,7 @@
             <div>{{Profile.name}}</div>
             <div *ngIf="Profile.Bio">{{Profile.Bio}}</div>
             <div *ngIf="Profile.location">{{Profile.location}}</div>
-            <div *ngIf="Profile.twitter_username">{{Profile.twitter_username}}</div>
+            <div *ngIf="Profile.twitter_username">Twitter : {{Profile.twitter_username}}</div>
         </div>
     </div>
     <!-- Repo section -->
@@ -26,6 +26,11 @@
                 <div>
                   <div class="text-xl font-medium text-black">{{repo.name}}</div>
                   <p class="text-slate-500" *ngIf="repo.description">{{repo.description}}</p>
+                  <div *ngIf="repo.language">
+                    <div *ngFor="let lang of repo.language">
+                        <button>{{lang}}</button>
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>

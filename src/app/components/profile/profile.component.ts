@@ -9,6 +9,7 @@ import {ApiService} from '../../services/api.service';
 export class ProfileComponent {
   Profile : any;
   Repos: any;
+  // RepoLang:any;
   constructor(private profileService: ApiService){
     this.profileService.getUser("").subscribe(profile => {
       console.log(profile);

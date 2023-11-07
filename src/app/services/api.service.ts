@@ -17,9 +17,14 @@ export class ApiService {
     return this.httpClient.get(`https://api.github.com/users/${this.username}`);
   }
 
+  // implement getRepos method by referring to the documentation. Add proper types for the return type and params 
   getUserRepos(){
     return this.httpClient.get(`https://api.github.com/users/${this.username}/repos`);
   }
+  
+  getRepoLanguage(repoName:string){
+    // https://api.github.com/repos/Gbirla06/Portfolio/languages
+    return this.httpClient.get(`https://api.github.com/repos/${this.username}/${repoName}/languages`);
+  }
 
-  // implement getRepos method by referring to the documentation. Add proper types for the return type and params 
 }
