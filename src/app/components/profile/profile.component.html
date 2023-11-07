@@ -1,0 +1,36 @@
+<div *ngIf="Profile">
+    <!-- Header -->
+    <div class="w-[100%] ml-14 p-6 flex">
+        <div class="mr-4">
+            <div class="w-52 h-52 m-3">
+                <img class="overflow-hidden border rounded-full border-gray-400 " src="{{Profile.avatar_url}}" alt="">
+            </div>
+            <div class="m-3">
+                <a href="{{Profile.html_url}}">{{Profile.html_url}}</a>
+            </div>
+        </div>
+        <div class="m-5 text-5xl font-medium">
+            <div>{{Profile.name}}</div>
+            <div *ngIf="Profile.Bio">{{Profile.Bio}}</div>
+            <div *ngIf="Profile.location">{{Profile.location}}</div>
+            <div *ngIf="Profile.twitter_username">{{Profile.twitter_username}}</div>
+        </div>
+    </div>
+    <!-- Repo section -->
+    <div class="grid grid-cols-2" >
+        <div *ngFor="let repo of Repos">
+            <div class="m-5 p-6 w-[100%] md:max-w-md mx-auto bg-white rounded-1 shadow-lg flex items-center space-x-4 border border-slate-950">
+                <!-- <div class="shrink-0">
+                  <img class="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo">
+                </div> -->
+                <div>
+                  <div class="text-xl font-medium text-black">{{repo.name}}</div>
+                  <p class="text-slate-500" *ngIf="repo.description">{{repo.description}}</p>
+                </div>
+            </div>
+        </div>
+        
+          
+        
+    </div>
+</div>
