@@ -27,4 +27,8 @@ export class ApiService {
     return this.httpClient.get(`https://api.github.com/repos/${this.username}/${repoName}/languages`);
   }
 
+  updateProfile(username:string){
+    this.username=username;
+  }
+
 }

@@ -7,31 +7,23 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  inputValue:string="";
-  
+  // username:string="";
+  Posts:any;
+  page:number=1;
+  count:number=0;
+  tableSize:number= 10;
+  tableSizes: any =[5,10,20,40,100];
   constructor(
     private apiService: ApiService
   ) {}
 
   ngOnInit() {
-    this.apiService.getUser('johnpapa').subscribe(console.log);
+    this.apiService.getUser('johnpapa').subscribe();
   }
 
-  addItem(){
-    // if(this.inputValue!==""){
-    //   const xhr = new XMLHttpRequest();
-    //   let str = "https://api.github.com/users/"+this.inputValue;
-    //   xhr.open("GET", str);
-    //   xhr.send();
-    //   xhr.responseType = "json";
-    //   xhr.onload = () => {
-    //     if (xhr.readyState == 4 && xhr.status == 200) {
-    //       console.log(xhr.response);
-    //     } else {
-    //       console.log(`Error: ${xhr.status}`);
-    //     }
-    //   };
-    // }
-    this.inputValue="";
-  }
+  // onTableDataChange(event:any):void {
+  //   this.tableSize = event.target.value;
+  //   this.page = 1;
+  //   this.
+  // }
 }

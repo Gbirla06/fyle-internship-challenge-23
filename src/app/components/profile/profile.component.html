@@ -1,3 +1,8 @@
+<div class="bg-slate-300 p-3 rounded">
+    <form action="">
+      <input type="text" class="w-full h-10 p-3" placeholder="Search for user" [(ngModel)]="username" name="username" (keyup)="findProfile()">
+    </form>
+</div>
 <div *ngIf="Profile">
     <!-- Header -->
     <div class="w-[100%] ml-14 p-6 flex">
@@ -5,37 +10,64 @@
             <div class="w-52 h-52 m-3">
                 <img class="overflow-hidden border rounded-full border-gray-400 " src="{{Profile.avatar_url}}" alt="">
             </div>
-            <div class="m-3">
-                <a href="{{Profile.html_url}}">{{Profile.html_url}}</a>
+            <div class="m-3 flex">
+                <div class="w-7 h-5 mt-1">
+                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 8c-2.248 0-4 1.752-4 4s1.752 4 4 4h2a1 1 0 1 1 0 2H8c-3.352 0-6-2.648-6-6s2.648-6 6-6h2a1 1 0 1 1 0 2H8zm5-1a1 1 0 0 1 1-1h2c3.352 0 6 2.648 6 6s-2.648 6-6 6h-2a1 1 0 1 1 0-2h2c2.248 0 4-1.752 4-4s-1.752-4-4-4h-2a1 1 0 0 1-1-1zm-6 5a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1z" fill="#0D0D0D"/></svg>
+                </div>
+                <div>
+                    <a href="{{Profile.html_url}}" target="_blank">{{Profile.html_url}}</a>
+                </div>
             </div>
         </div>
-        <div class="m-5 text-5xl font-medium">
-            <div>{{Profile.name}}</div>
+        <div class="m-5">
+            <div class="text-5xl font-medium">{{Profile.name}}</div>
             <div *ngIf="Profile.Bio">{{Profile.Bio}}</div>
-            <div *ngIf="Profile.location">{{Profile.location}}</div>
+            <div *ngIf="Profile.location" class="flex">
+                <div class="mt-2">
+                    <svg fill="#000000" width="25px" height="30px" viewBox="0 0 24 24" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg"><path d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0-3.124 3.074-3.124 8.057 0 11.13l5.656 5.565 5.657-5.565c3.124-3.073 3.124-8.056 0-11.13zm-5.657 8.195c-.668 0-1.295-.26-1.768-.732-.975-.975-.975-2.561 0-3.536.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732c.975.975.975 2.562 0 3.536-.472.472-1.1.732-1.768.732z"/></svg>
+                </div>
+                <div class="mt-3 mb-0">
+                    {{Profile.location}}
+                </div>
+            </div>
             <div *ngIf="Profile.twitter_username">Twitter : {{Profile.twitter_username}}</div>
         </div>
     </div>
+
     <!-- Repo section -->
+    <div class="flex items-end justify-end">
+        <div class="p-1 bg-slate-300 rounded">
+            <select (change)="onChangeSize($event)">
+                <option *ngFor="let total of totalProduct">
+                    {{total}}
+                </option>
+            </select>
+        </div>
+    </div>
+
     <div class="grid grid-cols-2" >
-        <div *ngFor="let repo of Repos">
+        <div *ngFor="let repo of Repos | paginate: { itemsPerPage: itemsPerPage, currentPage: p}">
             <div class="m-5 p-6 w-[100%] md:max-w-md mx-auto bg-white rounded-1 shadow-lg flex items-center space-x-4 border border-slate-950">
                 <!-- <div class="shrink-0">
                   <img class="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo">
                 </div> -->
-                <div>
-                  <div class="text-xl font-medium text-black">{{repo.name}}</div>
+                <div class="h-[130px]">
+                  <div class="text-xl font-medium text-black"><a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a></div>
                   <p class="text-slate-500" *ngIf="repo.description">{{repo.description}}</p>
                   <div *ngIf="repo.language">
-                    <div *ngFor="let lang of repo.language">
-                        <button>{{lang}}</button>
+                    <div *ngIf="repo.language">
+                        <button class="m-2 p-1 rounded bg-teal-800 text-white">{{repo.language}}</button>
                     </div>
                   </div>
                 </div>
             </div>
         </div>
-        
-          
-        
     </div>
+    <div class=" flex items-center justify-center m-3 p-3">
+        <pagination-controls class="items-center" (pageChange)="p = $event" ></pagination-controls> 
+    </div>
+
+</div>
+<div *ngIf="loader" class="w-[100%] h-[60%] flex items-center">
+    <img src="assets/imgs/loader.gif" alt="Loader" class="w-[100%] h-[100%]">
 </div>
