@@ -7,23 +7,45 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  // username:string="";
-  Posts:any;
-  page:number=1;
-  count:number=0;
-  tableSize:number= 10;
-  tableSizes: any =[5,10,20,40,100];
+
+  Profile : any;
+  Repos: any;
+  username: string="";
+  userNameFlag:boolean = false;
+  loader:boolean = true;
+  p:number = 1;
+  itemsPerPage: number = 10;
+  totalProduct: any = [10,20,50,100];
+
   constructor(
-    private apiService: ApiService
+    private profileService: ApiService
   ) {}
 
   ngOnInit() {
-    this.apiService.getUser('johnpapa').subscribe();
+    // this.apiService.getUser('johnpapa').subscribe();
   }
+  findProfile(){
+    if(this.username===""){
+      this.userNameFlag=false;
+    }
+    else{
+      this.userNameFlag=true;
+    }
+    this.profileService.updateProfile(this.username);
+    this.profileService.getUser("").subscribe(profile => {
+      console.log(profile);
+      this.Profile = profile;
+      this.loader=false;
+    })
 
-  // onTableDataChange(event:any):void {
-  //   this.tableSize = event.target.value;
-  //   this.page = 1;
-  //   this.
-  // }
+    this.profileService.getUserRepos().subscribe(repos => {
+      console.log(repos);
+      this.Repos = repos;
+    })
+  }
+  onChangeSize(event:any):void{
+    this.itemsPerPage = event.target.value;
+    this.p=1;
+
+  }
 }

@@ -6,12 +6,10 @@ import {NgxPaginationModule} from 'ngx-pagination'
 import { AppComponent } from './app.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ProfileComponent } from './components/profile/profile.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent
   ],
   imports: [
     BrowserModule,
