@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './services/api.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-
+  title:string = "FyleFrontendChallenge";
   Profile : any;
   Repos: any;
   username: string="";
@@ -18,11 +19,12 @@ export class AppComponent implements OnInit{
   totalProduct: any = [10,20,50,100];
 
   constructor(
-    private profileService: ApiService
+    private profileService: ApiService,
+    private httpClient: HttpClient  
   ) {}
 
   ngOnInit() {
-    // this.apiService.getUser('johnpapa').subscribe();
+    // this.profileService.getUser('johnpapa').subscribe();
   }
   findProfile(){
     if(this.username===""){
