@@ -11,16 +11,23 @@ export class ProfileComponent {
   Profile : any;
   Repos: any;
   username: string="";
+  userNameFlag:boolean = false;
   loader:boolean = true;
   p:number = 1;
-  itemsPerPage: number = 5;
-  totalProduct: any = [5,10,20,50,100];
+  itemsPerPage: number = 10;
+  totalProduct: any = [10,20,50,100];
 
   constructor(private profileService: ApiService){
     
   }
-
+  
   findProfile(){
+    if(this.username===""){
+      this.userNameFlag=false;
+    }
+    else{
+      this.userNameFlag=true;
+    }
     this.profileService.updateProfile(this.username);
     this.profileService.getUser("").subscribe(profile => {
       console.log(profile);
