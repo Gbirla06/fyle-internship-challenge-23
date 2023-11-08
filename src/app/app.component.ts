@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { ApiService } from './services/api.service';
 import { HttpClient } from '@angular/common/http';
+// import { form } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-root',
